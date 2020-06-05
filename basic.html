@@ -1,9 +1,17 @@
----
-title: 'Basic | Vormulir'
-v-start: '{{'
-v-end: '}}'
----
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vormulir</title>
+  <link rel="stylesheet" href="/css/spectre.min.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    
 <div id="vue-app">
   <h1>Basic</h1>
   <p>Basic usage like this will generating a default complex error messages.</p>
@@ -17,8 +25,8 @@ v-end: '}}'
         id="input-name"
         placeholder="Name"
         v-model="form.field.name">
-        <div class="form-input-hint">{{ v-start }} errors.name.required && errors.name.required.message {{ v-end }}</div>
-        <div class="form-input-hint">{{ v-start }} errors.name.maxLength && errors.name.maxLength.message {{ v-end }}</div>
+        <div class="form-input-hint">{{ errors.name.required && errors.name.required.message }}</div>
+        <div class="form-input-hint">{{ errors.name.maxLength && errors.name.maxLength.message }}</div>
     </div>
     <div class="form-group">
       <label class="form-label" for="input-hobby">Hobby</label>
@@ -28,8 +36,8 @@ v-end: '}}'
         id="input-hobby"
         placeholder="Hobby"
         v-model="form.field.hobby">
-        <div class="form-input-hint">{{ v-start }} errors.hobby.required && errors.hobby.required.message {{ v-end }}</div>
-        <div class="form-input-hint">{{ v-start }} errors.hobby.minLength && errors.hobby.minLength.message {{ v-end }}</div>
+        <div class="form-input-hint">{{ errors.hobby.required && errors.hobby.required.message }}</div>
+        <div class="form-input-hint">{{ errors.hobby.minLength && errors.hobby.minLength.message }}</div>
       </div>
     <div class="form-group">
       <button type="submit" class="btn" :class="buttonClass">Submit</button>
@@ -38,7 +46,7 @@ v-end: '}}'
   
   <br>
   
-  <pre class="result">{{ v-start }} $data {{ v-end }}</pre>
+  <pre class="result">{{ $data }}</pre>
 </div>
 
 <script type="module">
@@ -92,3 +100,7 @@ v-end: '}}'
     }
   })
 </script>
+  </div>
+  <script src="/js/prism.js"></script>
+</body>
+</html>

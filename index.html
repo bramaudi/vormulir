@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vormulir</title>
+  <link rel="stylesheet" href="/css/spectre.min.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <div class="brand">
+  <img src="/icon/vormulir-min.png" class="logo" alt="Vormulir logo">
+  <h1>Vormulir</h1>
+<p>A simple Vue Form helper to make form validation more easier.</p>
+  <div class="tag">v1.0.0</div>
+</div>
+<h2>Installation</h2>
+<pre><code class="language-bash">npm i vormulir
+# or
+yarn add vormulir
+</code></pre>
+<hr>
+<h2>Usage</h2>
+<p>Import <strong>Vormulir</strong> in somewhere inside your Vue Component that contain the form.</p>
+<pre><code class="language-js">import Vormulir from 'vormulir/core'
+</code></pre>
+<p>Make instance of <strong>Vormulir</strong> with array of form fields as the value.</p>
+<pre><code class="language-js">const vormulir = new Vormulir([
+  'name',
+  'age'
+])
+</code></pre>
+<hr>
+<h2>Features</h2>
+<h3>State Helper</h3>
+<p>Inject the state helper from <strong>Vormulir</strong> instance that you've already declared before to your Vue Component <code>data()</code> section using spread operator like so.</p>
+<pre><code class="language-js">data () {
+  return {
+    // ...
+    ...vormulir.state
+    // ...
+  }
+}
+</code></pre>
+<p>this will give a structur of your vue state to something like this.</p>
+<pre><code class="language-json">{
+  &quot;form&quot;: {
+    &quot;success&quot;: &quot;&quot;,
+    &quot;loading&quot;: false,
+    &quot;field&quot;: {
+      &quot;name&quot;: &quot;&quot;,
+      &quot;age&quot;: &quot;&quot;
+    }
+  },
+  &quot;errors&quot;: {
+    &quot;name&quot;: {
+      &quot;state&quot;: null,
+      &quot;message&quot;: &quot;&quot;
+    },
+    &quot;age&quot;: {
+      &quot;state&quot;: null,
+      &quot;message&quot;: &quot;&quot;
+    }
+  }
+}
+</code></pre>
+<hr>
+<h3>Validation</h3>
+<p>Let's move to the fun part, first before make a validation you must make an rules object about how your validator's work, this will be look like this.</p>
+<pre><code class="language-js">const rules = {
+  name: {
+    required: &quot;Name is required&quot;
+  },
+  age: {
+    required: &quot;Age is required&quot;
+  }
+}
+</code></pre>
+<p>In rules example above the <code>name</code> and <code>age</code> field is marked as required and followed with error message as it value.</p>
+<p>After that, to start validating the <code>rules</code> you've created you can use <code>validate()</code> function from <strong>vormulir</strong>, it have 2 arguments, first is <em>input</em> and the second is <em>rules object</em>, in real world may look like this;</p>
+<pre><code class="language-js">const result = vormulir.validate(this.form.field, rules)
+console.log(result)
+</code></pre>
+<p>The value of input is an object so you can use the current state (<code>this.form.field</code>) as input, and the return of <code>result</code> variable will be an object that have <strong>passes</strong> property contain <em>boolean value</em> and <strong>errors</strong> property contain <em>errors object</em> (same with errors object in vue state).</p>
+<hr>
+<h2>Demo</h2>
+<p>Here are some live demo (source code of these example are located on <a href="https://github.com/bramaudi/vormulir/tree/master/docs/example" target="_blank">example folder</a> in repository.)</p>
+<ul>
+<li><a href="basic.html" title="Basic Usage">Basic</a></li>
+</ul>
+
+  </div>
+  <script src="/js/prism.js"></script>
+</body>
+</html>
