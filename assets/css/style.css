@@ -1,0 +1,38 @@
+body {
+  max-width: 600px;
+  margin: 5% auto;
+  padding: 1rem;
+}
+code {
+  background: none;
+}
+
+.brand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.brand .logo img {
+  width: 5rem;
+}
+.brand h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.description {
+  text-align: center;
+  margin: 0 auto 3rem;
+  padding: .5rem 1.5rem 1.5rem;
+  border-bottom: 1px dotted #dddddd;
+}
+
+.result {
+  border: 1px solid #cccccc;
+  padding: 15px;
+  overflow: auto
+}
+.hljs {
+  padding: .5rem !important;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vormulir</title>
+  <link rel="manifest" href="/assets/manifest.json" />
+  <!-- ios support -->
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="/assets/icons/android-chrome-192x192.png" />
+  <link rel="apple-touch-icon" href="/assets/icons/android-chrome-512x512.png" />
+  <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/spectre.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    
+<div class="brand">
+  <div class="logo">
+    <img src="/assets/icon/vormulir-min.png" alt="Vormulir logo">
+  </div>
+  <h1>Vormulir</h1>
+</div>
+<p class="description">A simple Vue Form helper to make form validation more easier.</p>
+
+<h3>Installation</h3>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);">npm i vormulir
+<span class="hljs-comment" style="color: rgb(98, 114, 164);"># or</span>
+yarn add vormulir</pre>
+
+<div class="divider" style="margin: 1.5rem 0;"></div>
+
+<h3>Usage</h3>
+<p>Import <strong>Vormulir</strong> in somewhere inside your Vue Component that contain the form.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);"><span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">import</span> Vormulir <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">from</span> <span class="hljs-string" style="color: rgb(241, 250, 140);">'vormulir/core'</span></pre>
+
+<p>Make instance of <strong>Vormulir</strong> with array of form fields as the value.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);"><span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">const</span> vormulir = <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">new</span> Vormulir([
+  <span class="hljs-string" style="color: rgb(241, 250, 140);">'name'</span>,
+  <span class="hljs-string" style="color: rgb(241, 250, 140);">'age'</span>
+])</pre>
+
+<div class="divider" style="margin: 1rem 0;"></div>
+
+<h4>State Helper</h4>
+<p>Inject the state helper from <strong>Vormulir</strong> instance that you've already declared before to your Vue Component <code>data()</code> section using spread operator like so;</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);">data () {
+  <span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">return</span> {
+    <span class="hljs-comment" style="color: rgb(98, 114, 164);">// ...</span>
+    ...vormulir.state
+    <span class="hljs-comment" style="color: rgb(98, 114, 164);">// ...</span>
+  }
+}</pre>
+
+<p>this will give a structur of your vue state to something like this</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);">{
+  <span class="hljs-attr">"form"</span>: {
+    <span class="hljs-attr">"success"</span>: <span class="hljs-string" style="color: rgb(241, 250, 140);">""</span>,
+    <span class="hljs-attr">"loading"</span>: <span class="hljs-literal" style="color: rgb(139, 233, 253); font-weight: 700;">false</span>,
+    <span class="hljs-attr">"field"</span>: {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string" style="color: rgb(241, 250, 140);">""</span>,
+      <span class="hljs-attr">"age"</span>: <span class="hljs-string" style="color: rgb(241, 250, 140);">""</span>
+    }
+  },
+  <span class="hljs-attr">"errors"</span>: {
+    <span class="hljs-attr">"name"</span>: {
+      <span class="hljs-attr">"state"</span>: <span class="hljs-literal" style="color: rgb(139, 233, 253); font-weight: 700;">null</span>,
+      <span class="hljs-attr">"message"</span>: <span class="hljs-string" style="color: rgb(241, 250, 140);">""</span>
+    },
+    <span class="hljs-attr">"age"</span>: {
+      <span class="hljs-attr">"state"</span>: <span class="hljs-literal" style="color: rgb(139, 233, 253); font-weight: 700;">null</span>,
+      <span class="hljs-attr">"message"</span>: <span class="hljs-string" style="color: rgb(241, 250, 140);">""</span>
+    }
+  }
+}</pre>
+
+<div class="divider" style="margin: 1rem 0;"></div>
+
+<h4>Validation</h4>
+<p>Let's move to the fun part, first before make a validation you must make an rules object about how your validator's work, this will be look like this;</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);"><span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">const</span> rules = {
+  name: {
+    required: <span class="hljs-string" style="color: rgb(241, 250, 140);">"Name is required"</span>
+  },
+  age: {
+    required: <span class="hljs-string" style="color: rgb(241, 250, 140);">"Age is required"</span>
+  }
+}</pre>
+
+<p>In rules example above the <code>name</code> and <code>age</code> field is marked as required and followed with error message as it value.</p>
+
+<p>After that, to start validating the <code>rules</code> you've created you can use <code>validate()</code> function from <strong>vormulir</strong>, it have 2 arguments, first is <em>input</em> and the second is <em>rules object</em>, in real world may look like this;</p>
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 42, 54); color: rgb(248, 248, 242);"><span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">const</span> result = vormulir.validate(<span class="hljs-keyword" style="color: rgb(139, 233, 253); font-weight: 700;">this</span>.form.field, rules)
+<span class="hljs-built_in">console</span>.log(result)</pre>
+
+<p>The value of input is an object so you can use the current state (<code>this.form.field</code>) as input, and the return of <code>result</code> variable will be an object that have <strong>passes</strong> property contain <em>boolean value</em> and <strong>errors</strong> property contain <em>errors object</em> (same with errors object in vue state).</p>
+
+<div class="divider" style="margin: 1.5rem 0;"></div>
+
+<h3>Demo</h3>
+
+<p>Here are some live demo (source code of these example are located on <a href="https://github.com/bramaudi/vormulir/tree/master/docs/example">example folder</a> in repository.)</p>
+
+<ul>
+  <li><a href="example/basic.html" title="Basic Usage">Basic</a></li>
+</ul>
+  </div>
+</body>
+</html>

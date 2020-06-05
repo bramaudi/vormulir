@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic | Vormulir</title>
+  <link rel="manifest" href="/assets/manifest.json" />
+  <!-- ios support -->
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="/assets/icons/android-chrome-192x192.png" />
+  <link rel="apple-touch-icon" href="/assets/icons/android-chrome-512x512.png" />
+  <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="shortcut icon" href="/assets/icon/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/spectre.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    
+<div id="vue-app">
+  <h1>Basic</h1>
+  <p>Basic usage like this will generating a default complex error messages.</p>
+  <div class="divider"></div>
+  <form @submit="handleSubmit">
+    <div class="form-group">
+      <label class="form-label" for="input-name">Name</label>
+      <input
+        class="form-input"
+        type="text"
+        id="input-name"
+        placeholder="Name"
+        v-model="form.field.name">
+        <div class="form-input-hint">{{ errors.name.required && errors.name.required.message }}</div>
+        <div class="form-input-hint">{{ errors.name.maxLength && errors.name.maxLength.message }}</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="input-hobby">Hobby</label>
+      <input
+        class="form-input"
+        type="text"
+        id="input-hobby"
+        placeholder="Hobby"
+        v-model="form.field.hobby">
+        <div class="form-input-hint">{{ errors.hobby.required && errors.hobby.required.message }}</div>
+        <div class="form-input-hint">{{ errors.hobby.minLength && errors.hobby.minLength.message }}</div>
+      </div>
+    <div class="form-group">
+      <button type="submit" class="btn" :class="buttonClass">Submit</button>
+    </div>
+  </form>
+  
+  <br>
+  
+  <pre class="result">{{ $data }}</pre>
+</div>
+
+<script type="module">
+  import Vue from '/assets/js/vue-esm-2.6.11.js'
+  import Vormulir from '/assets/js/core.js'
+
+  const vormulir = new Vormulir([
+    'name',
+    'hobby'
+  ])
+
+  const rules = {
+    name: {
+      required: "Name is required",
+      maxLength: {
+        value: 10,
+        message: "Max. name length is 10"
+      }
+    },
+    hobby: {
+      required: "Hobby is required",
+      minLength: {
+        value: 3,
+        message: "Min. hobby length is 3"
+      }
+    }
+  }
+
+  new Vue({
+    el: '#vue-app',
+    data () { 
+      return {
+        ...vormulir.state
+      }
+    },
+    computed: {
+      buttonClass () {
+        return this.errors.passes ? 'btn-success' : 'btn-error'
+      }
+    },
+    methods: {
+      handleSubmit (e) {
+        e.preventDefault()
+        const validate = vormulir.validate(this.form.field, rules)
+        if (validate.passes) {
+          console.log('%c Passsed !', 'background: #002708; color: lime')
+        } else {
+          console.error('Fail !')
+        }
+      }
+    }
+  })
+</script>
+  </div>
+</body>
+</html>
