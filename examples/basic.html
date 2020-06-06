@@ -12,14 +12,18 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+  <a href="https://github.com/bramaudi/vormulir" class="ribbon">Fork me on GitHub</a>
   <div class="container">
     
 <div id="vue-app">
   <h1>Basic</h1>
-  <p>Basic usage like this will generating a default complex error messages.</p>
+  <p>Basic usage like this will generating a default complex error messages, if you are looking the simple one then try to <a href="/examples/flatten.html">flatten function</a>.</p>
   <div class="divider"></div>
   <form @submit="handleSubmit">
-    <div class="form-group">
+    <div class="form-group" :class="{
+      'has-error': errors.name && errors.name.required && !errors.name.required.state
+        || errors.name && errors.name.maxLength && !errors.name.maxLength.state
+    }">
       <label class="form-label" for="input-name">Name</label>
       <input
         class="form-input"
@@ -27,10 +31,13 @@
         id="input-name"
         placeholder="Name"
         v-model="form.field.name">
-        <div class="form-input-hint">{{ errors.name.required && errors.name.required.message }}</div>
-        <div class="form-input-hint">{{ errors.name.maxLength && errors.name.maxLength.message }}</div>
+        <div class="form-input-hint">{{ errors.name && errors.name.required && errors.name.required.message }}</div>
+        <div class="form-input-hint">{{ errors.name && errors.name.maxLength && errors.name.maxLength.message }}</div>
     </div>
-    <div class="form-group">
+    <div class="form-group" :class="{
+      'has-error': errors.hobby && errors.hobby.required && !errors.hobby.required.state
+        || errors.hobby && errors.hobby.minxLength && !errors.hobby.minxLength.state
+    }">
       <label class="form-label" for="input-hobby">Hobby</label>
       <input
         class="form-input"
@@ -38,8 +45,8 @@
         id="input-hobby"
         placeholder="Hobby"
         v-model="form.field.hobby">
-        <div class="form-input-hint">{{ errors.hobby.required && errors.hobby.required.message }}</div>
-        <div class="form-input-hint">{{ errors.hobby.minLength && errors.hobby.minLength.message }}</div>
+        <div class="form-input-hint">{{ errors.hobby && errors.hobby.required && errors.hobby.required.message }}</div>
+        <div class="form-input-hint">{{ errors.hobby && errors.hobby.minLength && errors.hobby.minLength.message }}</div>
       </div>
     <div class="form-group">
       <button type="submit" class="btn" :class="buttonClass">Submit</button>
@@ -53,7 +60,7 @@
 
 <script type="module">
   import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-  import Vormulir from 'https://cdn.jsdelivr.net/npm/vormulir@1.0.0/dist/core.js'
+  import Vormulir from 'https://cdn.jsdelivr.net/npm/vormulir/dist/core.js'
 
   const vormulir = new Vormulir([
     'name',

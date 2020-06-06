@@ -12,6 +12,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+  <a href="https://github.com/bramaudi/vormulir" class="ribbon">Fork me on GitHub</a>
   <div class="container">
     
 <div id="vue-app">
@@ -19,7 +20,7 @@
   <p>We can more simplify our errors message output with <code>flattenMessage()</code> function like so.</p>
   <div class="divider"></div>
   <form @submit="handleSubmit">
-    <div class="form-group">
+    <div class="form-group" :class="{ 'has-error': errors.name }">
       <label class="form-label" for="input-name">Name</label>
       <input
         class="form-input"
@@ -27,9 +28,9 @@
         id="input-name"
         placeholder="Name"
         v-model="form.field.name">
-        <div class="form-input-hint" v-if="errors.name">{{ errors.name.message }}</div>
+        <div class="form-input-hint" v-if="errors.name">{{ errors.name }}</div>
     </div>
-    <div class="form-group">
+    <div class="form-group" :class="{ 'has-error': errors.hobby }">
       <label class="form-label" for="input-hobby">Hobby</label>
       <input
         class="form-input"
@@ -37,7 +38,7 @@
         id="input-hobby"
         placeholder="Hobby"
         v-model="form.field.hobby">
-        <div class="form-input-hint" v-if="errors.hobby">{{ errors.hobby.message }}</div>
+        <div class="form-input-hint" v-if="errors.hobby">{{ errors.hobby }}</div>
       </div>
     <div class="form-group">
       <button type="submit" class="btn" :class="buttonClass">Submit</button>
@@ -51,7 +52,7 @@
 
 <script type="module">
   import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-  import Vormulir from 'https://cdn.jsdelivr.net/npm/vormulir@1.0.0/dist/core.js'
+  import Vormulir from 'https://cdn.jsdelivr.net/npm/vormulir/dist/core.js'
 
   const vormulir = new Vormulir([
     'name',
