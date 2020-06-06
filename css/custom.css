@@ -23,6 +23,7 @@ body {
   margin: -.5rem 0 2rem;
   padding: 0 5px;
   border-radius: 5px;
+  text-decoration: none !important;
   font-family: monospace;
   background: #334a5e;
   color: #dddddd;
