@@ -37,8 +37,8 @@ hr {
   border:1px solid #eeeeee;
   margin: 1rem auto;
 }
-p {
-  margin: 1rem 0;
+li > p {
+  display: inline;
 }
 
 /* Github Ribbon */

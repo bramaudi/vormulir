@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Rules API | Vormulir</title>
+  
+  <link rel="stylesheet" href="/css/spectre.min.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a href="https://github.com/bramaudi/vormulir" class="ribbon">Fork me on GitHub</a>
+  <div class="container">
+    <h1>Rules</h1>
+<p>Rules are function that used to validate the input, currently we still have these basic built-in function:</p>
+<ul>
+<li><code>required</code> : string     <em>&quot;Field is required / cannot be empty.&quot;</em></li>
+</ul>
+<hr>
+<ul>
+<li><code>minLength</code> : object     <em>&quot;Field minimum length allowed.&quot;</em>
+<ul>
+<li><code>value</code> : number     <em>&quot;Minimum length of value&quot;</em></li>
+<li><code>message</code> : string     <em>&quot;Given error message&quot;</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><code>maxLength</code> : object     <em>&quot;Field maximum length allowed.&quot;`</em>
+<ul>
+<li><code>value</code> : number     <em>&quot;Maximum length of value&quot;</em></li>
+<li><code>message</code> : string     <em>&quot;Given error message&quot;</em></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <script src="/js/prism.js"></script>
+</body>
+</html>

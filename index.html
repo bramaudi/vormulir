@@ -18,7 +18,7 @@
   <img src="/icon/vormulir-min.png" class="logo" alt="Vormulir logo">
   <h1>Vormulir</h1>
 <p>A simple Vue Form helper to make form validation more easier.</p>
-<p><a href="https://github.com/bramaudi/vormulir/blob/master/CHANGELOG.md" class="tag tooltip tooltip-bottom" data-tooltip="See CHANGELOG">v1.0.2</a></p>
+<p><a href="https://github.com/bramaudi/vormulir/blob/master/CHANGELOG.md" class="tag tooltip tooltip-bottom" data-tooltip="See CHANGELOG">v1.0</a></p>
 </div>
 <h2>Installation</h2>
 <pre><code class="language-bash">npm i vormulir
@@ -71,7 +71,7 @@ yarn add vormulir
 </code></pre>
 <hr>
 <h3>Validation</h3>
-<p>Let's move to the fun part, first before make a validation you must make an rules object about how your validator's work, this will be look like this.</p>
+<p>Let's move to the fun part, first before we make a validation we must make some rules in object, this is about how your validator work later, this will be look like this.</p>
 <pre><code class="language-js">const rules = {
   name: {
     required: &quot;Name is required&quot;
@@ -81,6 +81,9 @@ yarn add vormulir
   }
 }
 </code></pre>
+<blockquote>
+<p>Read the full list of available built-in <a href="rules.html">rules API</a></p>
+</blockquote>
 <p>In rules example above the <code>name</code> and <code>age</code> field is marked as required and followed with error message as it value.</p>
 <p>After that, to start validating the <code>rules</code> you've created you can use <code>validate()</code> function from <strong>vormulir</strong>, it have 2 arguments, first is <em>input</em> and the second is <em>rules object</em>, in real world may look like this;</p>
 <pre><code class="language-js">const result = vormulir.validate(this.form.field, rules)
